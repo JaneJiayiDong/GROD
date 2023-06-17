@@ -1,0 +1,58 @@
+
+dir_name: outputs
+task_name: cuts_example
+
+log:
+  stdout: false
+  stderr: false
+  tensorboard: true
+
+data:
+  data_name: /mESC/1000_mESC/
+  data_dir: /home/djy/GRODE/data/rdata/mESC/1000_mESC/ # /home/djy/GRODE/data/rdata/mESC/1000_mESC/
+  cell_num: 100000
+  init_fill: zoh
+
+
+grode:
+  n_nodes: 11 # 1000
+  input_step: 10 # 10
+  batch_size: 128
+  data_dim: 1
+  task: non_celltype_GRN
+  pos_ebd_flag: true
+  graph_learner_flag: false
+  pred_model: ode
+
+  total_epoch: 200
+  supervision_policy: masked_before_150  # masked_before_150 
+  fill_policy: rate_0.1_after_50 # rate_0.1_after_50
+  show_graph_every: 50
+
+
+  data_pred:
+    pred_step: 5
+    mlp_hid: 128 # 128
+    ebd_dim: 32 # 32
+    lr_data_start: 1e-3
+    lr_data_end: 1e-5
+    weight_decay: 0.001
+    prob: true
+    lambda_k_start: 1
+    lambda_k_end: 1
+
+  graph_discov:
+    lambda_s_start: 1
+    lambda_s_end: 1
+    lr_graph_start: 1e-4
+    lr_graph_end: 1e-5
+    start_tau: 1
+    end_tau: 0.1
+
+  causal_thres: value_0.5 
+
+reproduc:
+  seed: 52
+  benchmark: false
+  deterministic: true
+    
