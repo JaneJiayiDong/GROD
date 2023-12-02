@@ -1,6 +1,6 @@
 
 dir_name: outputs
-task_name: cuts_example
+task_name: GROD_example
 
 log:
   stdout: false
